@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 const TILE_WRAPPER_SELECTED_CLASS = 'tile-wrapper selected';
 const TILE_WRAPPER_UNSELECTED_CLASS = 'tile-wrapper';
@@ -28,4 +28,3 @@ export default class BoatTile extends LightningElement {
       this.dispatchEvent(new CustomEvent('boatselect', { detail: { boatId: this.selectedBoatId} }));
   }
 }
-  
