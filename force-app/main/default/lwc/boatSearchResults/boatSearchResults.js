@@ -66,10 +66,9 @@ export default class BoatSearchResults extends LightningElement {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         const updatedFields = event.detail.draftValues;
-        console.log('fields  '+ JSON.stringify(updatedFields));
+
         updateBoatList({data: updatedFields})
         .then(() => {
-            console.log('sucesso');
             const evt = new ShowToastEvent({
                 title: SUCCESS_TITLE,
                 message: MESSAGE_SHIP_IT,
@@ -79,7 +78,6 @@ export default class BoatSearchResults extends LightningElement {
             this.refresh();
         })
         .catch(error => {
-            console.log('erro' + error.message);
             const evt = new ShowToastEvent({
                 title: ERROR_TITLE,
                 message: error.message,

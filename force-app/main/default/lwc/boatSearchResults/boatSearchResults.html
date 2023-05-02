@@ -19,7 +19,7 @@
         <lightning-tab label="Boat Editor">
             <!-- Scrollable div and lightning datatable go here -->
             <div class="slds-scrollable_y">
-                <lightning-datatable key-field="id" data={boats} show-row-number-column columns={columns} onsave={handleSave}>
+                <lightning-datatable key-field="Id" data={boats}  draft-values={draftValues} show-row-number-column columns={columns} onsave={handleSave}>
                 </lightning-datatable>
             </div>
         </lightning-tab>
