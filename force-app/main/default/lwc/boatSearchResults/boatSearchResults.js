@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import getBoat from '@salesforce/apex/BoatDataService.getBoats';
 import { publish, MessageContext } from 'lightning/messageService';
-import recordSelected from '@salesforce/messageChannel/BoatMessageChannel__c';
+import BOATMC from '@salesforce/messageChannel/BoatMessageChannel__c';
 import updateBoatList from '@salesforce/apex/BoatDataService.updateBoatList';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
@@ -29,9 +29,9 @@ export default class BoatSearchResults extends LightningElement {
     isLoading = false;
 
     sendMessageService(boatId) {
-        /*const payload = { boatId: this.selectedBoatId };
+        const payload = { boatId: boatId };
 
-        publish(this.messageContext, recordSelected, payload);*/
+        publish(this.messageContext, BOATMC, payload);
     }
 
     @api
@@ -93,7 +93,7 @@ export default class BoatSearchResults extends LightningElement {
 
     updateSelectedTile(event){
         this.selectedBoatId = event.detail.boatId;
-        this.sendMessageService(boatId);
+        this.sendMessageService(this.selectedBoatId);
     }
 
     notifyLoading(isLoading) { 
