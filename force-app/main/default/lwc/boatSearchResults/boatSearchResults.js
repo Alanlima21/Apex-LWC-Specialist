@@ -29,7 +29,7 @@ export default class BoatSearchResults extends LightningElement {
     isLoading = false;
 
     sendMessageService(boatId) {
-        const payload = { boatId: boatId };
+        const payload = { recordId : boatId };
 
         publish(this.messageContext, BOATMC, payload);
     }
