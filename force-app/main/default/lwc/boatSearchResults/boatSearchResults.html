@@ -1,30 +1,33 @@
 <template>
-    <lightning-tabset>
-        <lightning-tab label="Gallery">
-            <div class="slds-scrollable_y">
-                <!-- layout horizontally aligned to the center  -->
-                <!-- layout allowing multiple rows -->
-                <lightning-layout vertical-align="center" class="x-large" multiple-rows>
-                    <!-- template looping through each boat -->
-                    <template if:true={boats} for:each={boats} for:item="boat">
-                        <!-- lightning-layout-item for each boat -->
-                        <lightning-layout-item key={boat.Id} size="12" small-device-size="6" medium-device-size="4"
-                            large-device-size="3" flexibility="auto" padding="around-small">
-                            <c-boat-tile onboatselect={updateSelectedTile} boat={boat}></c-boat-tile>
-                        </lightning-layout-item>
-                    </template>
-                </lightning-layout>
-            </div>
-        </lightning-tab>
-        <lightning-tab label="Boat Editor">
-            <!-- Scrollable div and lightning datatable go here -->
-            <div class="slds-scrollable_y">
-                <lightning-datatable key-field="Id" data={boats}  draft-values={draftValues} show-row-number-column columns={columns} onsave={handleSave}>
-                </lightning-datatable>
-            </div>
-        </lightning-tab>
-        <lightning-tab label="Boats Near Me">
-           <c-boats-near-me bot-id={selectedBoatId}></c-boats-near-me>
-        </lightning-tab>
-    </lightning-tabset>
+    <lightning-card>
+        <lightning-tabset>
+            <lightning-tab label="Gallery">
+                <div class="slds-scrollable_y">
+                    <!-- layout horizontally aligned to the center  -->
+                    <!-- layout allowing multiple rows -->
+                    <lightning-layout vertical-align="center" class="x-large" multiple-rows>
+                        <!-- template looping through each boat -->
+                        <template if:true={boats} for:each={boats} for:item="boat">
+                            <!-- lightning-layout-item for each boat -->
+                            <lightning-layout-item key={boat.Id} size="12" small-device-size="6" medium-device-size="4"
+                                large-device-size="3" flexibility="auto" padding="around-small">
+                                <c-boat-tile onboatselect={updateSelectedTile} boat={boat}></c-boat-tile>
+                            </lightning-layout-item>
+                        </template>
+                    </lightning-layout>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Boat Editor">
+                <!-- Scrollable div and lightning datatable go here -->
+                <div class="slds-scrollable_y">
+                    <lightning-datatable key-field="Id" data={boats} draft-values={draftValues} show-row-number-column
+                        columns={columns} onsave={handleSave}>
+                    </lightning-datatable>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Boats Near Me">
+                <c-boats-near-me bot-id={selectedBoatId}></c-boats-near-me>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
 </template>
