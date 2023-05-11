@@ -1,9 +1,10 @@
-import { LightningElement, api, wire } from 'lwc';
-import getBoat from '@salesforce/apex/BoatDataService.getBoats';
+import { LightningElement, api, wire, track} from 'lwc';
+import getBoats from '@salesforce/apex/BoatDataService.getBoats';
 import { publish, MessageContext } from 'lightning/messageService';
 import BOATMC from '@salesforce/messageChannel/BoatMessageChannel__c';
 import updateBoatList from '@salesforce/apex/BoatDataService.updateBoatList';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 const SUCCESS_TITLE = 'Success';
 const MESSAGE_SHIP_IT     = 'Ship it!';
@@ -25,13 +26,12 @@ export default class BoatSearchResults extends LightningElement {
     selectedBoatId;
     boatTypeId = '';
     columns = columns;
-    boats;
+    @track boats;
+    @track draftValues = [];
     isLoading = false;
 
     sendMessageService(boatId) {
-        const payload = { recordId : boatId };
-
-        publish(this.messageContext, BOATMC, payload);
+        publish(this.messageContext, BOATMC, { recordId : boatId });
     }
 
     @api
@@ -41,7 +41,7 @@ export default class BoatSearchResults extends LightningElement {
         this.boatTypeId = boatTypeId;
     }
 
-    @wire(getBoat, {boatTypeId: '$boatTypeId'})
+    @wire(getBoats , {boatTypeId: '$boatTypeId'})
     wiredBoats({data, error}) {
         if (data) {
             this.boats = data;
@@ -49,8 +49,6 @@ export default class BoatSearchResults extends LightningElement {
             console.log('data.error');
             console.log(error);
         }
-        this.isLoading = false;
-        this.notifyLoading(this.isLoading);
     }
 
     async refresh() { 
