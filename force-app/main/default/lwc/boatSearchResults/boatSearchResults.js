@@ -39,6 +39,8 @@ export default class BoatSearchResults extends LightningElement {
         this.isLoading = true;
         this.notifyLoading(this.isLoading);
         this.boatTypeId = boatTypeId;
+        this.isLoading = false;
+        this.notifyLoading(this.isLoading);
     }
 
     @wire(getBoats , {boatTypeId: '$boatTypeId'})
