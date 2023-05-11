@@ -18,9 +18,9 @@ export default class BoatSearch  extends NavigationMixin(LightningElement) {
     // Handles search boat event
     // This custom event comes from the form
     searchBoats(event){ 
-        let id = event.detail.boatTypeId;
-        let cmp = this.template.querySelector('[data-id="results"]');
-        cmp.searchBoats(id);
+        let boatTypeId = event.detail.boatTypeId;
+        this.template.querySelector('c-boat-search-results').searchBoats(boatTypeId);
+        this.handleDoneLoading();
     }
     
     createNewBoat(){ 

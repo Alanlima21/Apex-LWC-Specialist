@@ -13,8 +13,10 @@
       </lightning-layout-item>
       <!-- Bottom -->
       <lightning-layout-item size="12" class="slds-p-top_small slds-is-relative">
-        <lightning-spinner alternative-text="Loading" variant="brand" size="large" if:true={isLoading}> </lightning-spinner>
-          <c-boat-search-results  data-id="results" onloading={handleLoading} ondoneloading={handleDoneLoading}></c-boat-search-results>
+        <template if:true={isLoading}>
+          <lightning-spinner alternative-text="Loading" variant="brand" size="large" if:true={isLoading}> </lightning-spinner>
+        </template>
+          <c-boat-search-results onloading={handleLoading} ondoneloading={handleDoneLoading}></c-boat-search-results>
       </lightning-layout-item>
     </lightning-layout>
   </template>
